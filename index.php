@@ -1,0 +1,942 @@
+
+<?php
+  @session_start();
+include 'dbcon.php';
+?>
+
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US"><head><meta http-equiv="content-type" content="text/html;charset=UTF-8"><meta charset="utf-8"><title>YouScholar</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="International Scholarships for students from around the world. ScholarshipsAds is the largest online database for  Undergraduate, Postgraduate, and fellowship scholarships."><link rel="canonical" href="https://www.scholarshipsads.com"><meta name="google-signin-client_id" content="869511197857-11levhiri5mpr0lt7rgsa63ad97bq7pl.apps.googleusercontent.com"><link href="favicons/2019-favicon.png" rel="icon"><link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i%7CPoppins:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"><link href="css/css-external.css" rel="stylesheet"><link href="css/css-style.css" rel="stylesheet"><!--[if lt IE 9]>
+  <script src="https://www.scholarshipsads.com/assets/js/html5shiv.js?version=3"></script>
+  <script src="https://www.scholarshipsads.com/assets/js/respond.min.js?version=3"></script>
+  <![endif]--></head><body>
+<div class="preloader hide">
+<div class="signal"></div>
+</div>
+<div id="wrapperParallax" class="wrapper clearfix">
+<?php
+
+include('Header.php');
+
+?>
+
+<section id="hero" class="hero divider-double-bottom bg-white"><div class="bg-section">
+<img src="images/background-sky.png" alt="background"></div>
+<div class="container">
+<div class="row">
+<div class="col-sm-12 col-md-12 col-lg-12">
+<div class="hero-heading">
+<h1 class="heading-title">Find Your Dream Scholarship</h1>
+</div>
+
+<div class="hero-content">
+<form action="Searchresult.php" method="POST">
+<div class="row">
+<div class="col-sm-5 col-md-5 col-lg-7">
+<div class="form-group">	
+<!--STATES-->
+<input type="text" name="sch_name" placeholder="Enter Scholarship Name" style=width:100%>
+</div>
+</div>
+
+
+
+
+<div class="col-12 col-sm-12 col-md-4 col-lg-3">
+     <div class="form-group">	
+          <!--STATES-->
+          <select name="State" class="js-selector" style="width:100%" data-input="select2" data-placeholder="Your State"><option value=""></option><option value="Andhra Pradesh">Andhra Pradesh</option><option value="75">Arunachal Pradesh</option><option value="279">Assam</option><option value="Bihar">Bihar</option><option value="63">Chhattisgarh</option><option value="Delhi">Delhi</option><option value="Goa">Goa</option><option value="Gujarat">Gujarat</option><option value="Haryana">Haryana</option><option value="195">Himachal pradesh</option><option value="86">Jharkhand</option><option value="Karnataka">Karnataka</option><option value="Kerala">Kerala</option><option value="Madhya Pradesh">Madhya Pradesh</option><option value="Maharashtra">Maharashtra</option><option value="37">Manipur</option><option value="73">Meghalaya</option><option value="14">Mizoram</option><option value="30">Nagaland</option><option value="128">Odisha</option><option value="Punjab">Punjab</option><option value="Rajasthan">Rajasthan</option><option value="247">Sikkim</option><option value="90">Tamil Nadu</option><option value="268">Telangana</option><option value="42">Tripura</option><option value="36">Uttar Pradesh</option><option value="109">Uttrakhand</option><option value="67">West Bengal</option><option value="Delhi">Delhi</option><option value="289">Chandigarh</option><option value="289">Andaman and Nicobar Island</option></select></div>
+</div>
+<div class="col-12 col-sm-12 col-md-12 col-lg-2">
+<button type="submit" class="btn"><i class="icon-search"></i> Find</button>
+</div>
+</div>
+
+</form>
+
+</div>
+</div>
+</div>
+</div>
+</section><section id="countries" class="countries list-blocks bg-white"><div class="container">
+<div class="row">
+<div class="col-sm-12 col-md-12 col-lg-12">
+<div class="heading text-center mb-60">
+<h2 class="heading-title">States</h2>
+</div>
+</div>
+<div class="col-sm-12 col-md-12 col-lg-12">
+<ul><li class="State">
+<a href="Delhi.php">
+<img src="images/09-flagbuttonround250.png" alt="Delhi"><h3>Delhi</h3>
+</a>
+</li>
+<li class="State">
+<a href="datatry.php">
+<img src="https://cdn.dnaindia.com/sites/default/files/styles/full/public/2018/05/01/677632-gujarat-day.jpg" alt="Gujarat"><h3>Gujarat</h3>
+</a>
+</li>
+<li class="State">
+<a href="Rajasthan.php">
+<img src="data:image/jpeg;base64,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" alt="Rajasthan"><h3>Rajasthan</h3>
+</a>
+</li>
+<li class="State">
+<a href="Karnataka.php">
+<img src="https://5.imimg.com/data5/GG/NP/GLADMIN-53547484/selection_003-500x500.png" alt="Karnataka"><h3>Karnataka</h3>
+</a>
+</li>
+<li class="State">
+<a href="Kerala.php">
+<img src="data:image/jpeg;base64,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" alt="Kerala"><h3>Kerala</h3>
+</a>
+</li>
+<li class="State">
+<a href="Maharashtra.php">
+<img src="https://www.trawell.in/admin/images/upload/955980848Mumbai_Main.jpg" alt="Maharashtra"><h3>Maharashtra</h3>
+</a>
+</li>
+<li class="State">
+<a href="Haryana.php">
+<img src="https://haryanatourism.gov.in/WriteReadData/images/ff_surajkund_mela.jpg" alt="Haryana"><h3>Haryana</h3>
+</a>
+</li>
+<!--<li class="State">
+<a href="france-scholarships.php">
+<img src="images/2019-france.png" alt="France"><h3>Assam</h3>
+</a>
+</li>
+<li class="State">
+<a href="austria-scholarships.php">
+<img src="images/Austria-austriaflag.png" alt="Austria"><h3>Bihar</h3>
+</a>
+</li>
+<li class="State">
+<a href="netherlands-scholarships.php">
+<img src="images/09-netherlands.png" alt="Netherlands"><h3>Chhattisgarh</h3>
+</a>
+</li>
+<li class="State">
+<a href="sweden-scholarships.php">
+<img src="images/01-sweden_2.jpg" alt="Sweden"><h3>Goa</h3>
+</a>
+</li>
+ <li class="State">
+<a href="belgium-scholarships.php">
+<img src="images/09-belgium.png" alt="Belgium"><h3>Hariyana</h3>
+</a>
+</li>
+<li class="State">
+<a href="belgium-scholarships.php">
+<img src="images/09-belgium.png" alt="Belgium"><h3>Himachal Pradhesh</h3>
+</a>
+</li>
+<li class="State">
+<a href="belgium-scholarships.php">
+<img src="images/09-belgium.png" alt="Belgium"><h3>Misoram</h3>
+</a>
+</li>
+<li class="State">
+<a href="belgium-scholarships.php">
+<img src="images/09-belgium.png" alt="Belgium"><h3>Jammu & Kashmir</h3>
+</a>
+</li>
+<li class="State">
+<a href="belgium-scholarships.php">
+<img src="images/09-belgium.png" alt="Belgium"><h3>Jharkhand</h3>
+</a>
+</li>
+<li class="State">
+<a href="belgium-scholarships.php">
+<img src="images/09-belgium.png" alt="Belgium"><h3>MadhyaPradhesh</h3>
+</a>
+</li>
+<li class="State">
+<a href="belgium-scholarships.php">
+<img src="images/09-belgium.png" alt="Belgium"><h3>Manipur</h3>
+</a>
+</li>
+<li class="State">
+<a href="belgium-scholarships.php">
+<img src="images/09-belgium.png" alt="Belgium"><h3>Meghalaya</h3>
+</a>
+</li>
+<li class="State">
+<a href="belgium-scholarships.php">
+<img src="images/09-belgium.png" alt="Belgium"><h3>Nagaland</h3>
+</a>
+</li>
+<li class="State">
+<a href="belgium-scholarships.php">
+<img src="images/09-belgium.png" alt="Belgium"><h3>Odisha</h3>
+</a>
+</li>
+<li class="State">
+<a href="belgium-scholarships.php">
+<img src="images/09-belgium.png" alt="Belgium"><h3>Punjab</h3>
+</a>
+</li>
+<li class="State">
+<a href="belgium-scholarships.php">
+<img src="images/09-belgium.png" alt="Belgium"><h3>Rajasthan</h3>
+</a>
+</li>
+<li class="State">
+<a href="belgium-scholarships.php">
+<img src="images/09-belgium.png" alt="Belgium"><h3>Sikkim</h3>
+</a>
+</li>
+<li class="State">
+<a href="belgium-scholarships.php">
+<img src="images/09-belgium.png" alt="Belgium"><h3>Tamil Nadu</h3>
+</a>
+</li>
+<li class="State">
+<a href="belgium-scholarships.php">
+<img src="images/09-belgium.png" alt="Belgium"><h3>Tripura</h3>
+</a>
+</li>
+<li class="State">
+<a href="belgium-scholarships.php">
+<img src="images/09-belgium.png" alt="Belgium"><h3>Telangana</h3>
+</a>
+</li>
+<li class="State">
+<a href="belgium-scholarships.php">
+<img src="images/09-belgium.png" alt="Belgium"><h3>Uttar Pradhesh</h3>
+</a>
+</li>
+<li class="State">
+<a href="belgium-scholarships.php">
+<img src="images/09-belgium.png" alt="Belgium"><h3>Uttarakhand</h3>
+</a>
+</li>-->
+<li class="State" >
+<a href="AndhraPradesh.php">
+<img src="https://www.caleidoscope.in/wp-content/uploads/2020/09/Culture-of-West-Bengal.jpg" alt="Andhra Pradesh"><h3>Andhra Pradesh</h3>
+</a>
+</li>
+
+
+<div class=""></div>
+</div> </div>
+</ul>
+<li>
+<div class="view-more">
+<a href="Allstates.php">View all <i class="icon-arrow-right"></i>
+</a>
+</div>
+</a>
+</li>
+<!--<div class="mt-30" style="text-align:center; margin-right: auto; margin-left: auto;"><script async src="js/js-adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7405902537822315" data-ad-slot="4696464739" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></section><section id="nationality" class="nationality divider-double-bottom bg-gradient"><div class="container">-->
+<!--<div class="row">
+<div class="col-sm-12 col-md-12 col-lg-12">
+<div class="heading text-center mb-60">
+<h2 class="heading-title text-white">Select Your Nationality</h2>
+</div>
+</div>
+<div class="col-sm-12 col-md-12 col-lg-12">-->
+<!--MAPS
+<div id="map-continents">
+<ul class="continents"><li class="c1"><a href="african-countries.php">Africa</a></li>
+<li class="c2"><a href="asian-countries.php">Asia</a></li>
+<li class="c3"><a href="oceania-countries.php">Australia</a></li>
+<li class="c4"><a href="european-countries.php">Europe</a></li>
+<li class="c5"><a href="americas-countries.php">North America</a></li>
+<li class="c6"><a href="americas-countries.php">South America</a></li>
+</ul></div>-->
+
+<!--</div>
+</div>
+<div class="row">
+<div class="col-sm-12 col-md-12 col-lg-12">
+<ul class="nationality-list"><li>
+<h3>Asian Countries</h3>
+<span>30 State</span>
+</li>
+<li>
+<h3>African Countries</h3>
+<span>33 State</span>
+</li>
+<li>
+<h3>European Countries</h3>
+<span>28 State</span>
+</li>
+<li>
+<h3>Oceania Countries</h3>
+<span>10 State</span>
+</li>
+<li>
+<h3>Americas Countries</h3>
+<span>17 State</span>
+</li>
+</ul></div>
+</div>-->
+</div>
+</section><section id="subjects" class="subjects list-blocks bg-white pb-0"><div class="container">
+<div class="row">
+<div class="col-sm-12 col-md-12 col-lg-12">
+<div class="heading text-center mb-60">
+<h2 class="heading-title">Choose Subject</h2>
+</div>
+</div>
+<div class="col-sm-12 col-md-12 col-lg-12">
+<ul><li class="subject">
+<a href="Engineering.php">
+<div class="list-icons">
+<i class="icon-Software"></i>
+</div>
+<h3>Engineering</h3>
+</a>
+</li>
+<li class="subject">
+<a href="Medicine.php">
+<div class="list-icons">
+<i class="icon-Medicine"></i>
+</div>
+<h3>Medicine</h3>
+</a>
+</li>
+<li class="subject">
+<a href="Pharmacy.php">
+<div class="list-icons">
+<i class="icon-Chemistry"></i>
+</div>
+<h3>Pharmacy</h3>
+</a>
+</li>
+<li class="subject">
+<a href="Architecture.php">
+<div class="list-icons">
+<i class="icon-Mathematics"></i>
+</div>
+<h3>Architecture</h3>
+</a>
+</li>
+<li class="subject">
+<a href="Law.php">
+<div class="list-icons">
+<i class="icon-Law"></i>
+</div>
+<h3>Law</h3>
+</a>
+</li>
+<li class="subject">
+<a href="Management.php">
+<div class="list-icons">
+<i class="icon-Management"></i>
+</div>
+<h3>Management</h3>
+</a>
+</li>
+<li class="subject">
+<a href="Sports.php">
+<div class="list-icons">
+<i class="icon-Botany"></i>
+</div>
+<h3>Sports</h3>
+</a>
+</li>
+<li class="subject">
+<a href="Arts.php">
+<div class="list-icons">
+<i class="icon-Arts"></i>
+</div>
+<h3>Art</h3>
+</a>
+</li>
+</li>
+</ul><div class="clearfix"></div>
+<div class="list-blocks-divider"></div>
+</div>
+
+<div class="col-sm-12 col-md-12 col-lg-12">
+<!--<a href="subject-wise-scholarships.php">View all <i class="icon-arrow-right"></i></a>
+</div>
+</div>-->
+</div>
+</div>
+<div class="mt-(-100" style="text-align:center; margin-right: auto; margin-left: auto;"><script async src="js/js-adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7405902537822315" data-ad-slot="4696464739" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></section><section id="universities" class="universities divider-square bg-white pt-(-100)"><div class="container">
+<!--<div class="row">
+<div class="col">
+<div class="heading mb-(-100)">
+<h2 class="heading-title">Universities</h2>
+</div>
+</div>
+<div class="col">
+<div class="view-more text-right">
+<a href="universities.php">View all <i class="icon-arrow-right"></i></a>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-12 col-md-4 col-lg-3">
+<div class="card-university">
+<div class="card-img">
+<a href="uk.php">
+<img src="images/UK-uk_(1)_(1).jpg" alt="UK Universities"></a>
+</div>
+<div class="card-body">
+<h5 class="card-title"><a href="uk.php">UK Universities</a></h5>
+<p>203 Universities</p>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-4 col-lg-3">
+<div class="card-university">
+<div class="card-img">
+<a href="usa.php">
+<img src="images/USA-usa.jpg" alt="USA Universities"></a>
+</div>
+<div class="card-body">
+<h5 class="card-title"><a href="usa.php">USA Universities</a></h5>
+<p>201 Universities</p>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-4 col-lg-3">
+<div class="card-university">
+<div class="card-img">
+<a href="canada.php">
+<img src="images/Canada-canada.png" alt="Canada Universities"></a>
+</div>
+<div class="card-body">
+<h5 class="card-title"><a href="canada.php">Canada Universities</a></h5>
+<p>49 Universities</p>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-4 col-lg-3">
+<div class="card-university">
+<div class="card-img">
+<a href="germany.php">
+<img src="images/Germany-germany.jpg" alt="Germany Universities"></a>
+</div>
+<div class="card-body">
+<h5 class="card-title"><a href="germany.php">Germany Universities</a></h5>
+<p>121 Universities</p>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-4 col-lg-3">
+<div class="card-university">
+<div class="card-img">
+<a href="italy.php">
+<img src="images/italy-italy.jpg" alt="Italy Universities"></a>
+</div>
+<div class="card-body">
+<h5 class="card-title"><a href="italy.php">Italy Universities</a></h5>
+<p>76 Universities</p>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-4 col-lg-3">
+<div class="card-university">
+<div class="card-img">
+<a href="australia.php">
+<img src="images/Australia-australia.jpg" alt="Australian Universities"></a>
+</div>
+<div class="card-body">
+<h5 class="card-title"><a href="australia.php">Australian Universities</a></h5>
+<p>69 Universities</p>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-4 col-lg-3">
+<div class="card-university">
+<div class="card-img">
+<a href="china.php">
+<img src="images/China-china.jpg" alt="China Universities"></a>
+</div>
+<div class="card-body">
+<h5 class="card-title"><a href="china.php">China Universities</a></h5>
+<p>69 Universities</p>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-4 col-lg-3">
+<div class="card-university">
+<div class="card-img">
+<a href="france.php">
+<img src="images/France-france.jpg" alt="France Universities"></a>
+</div>
+<div class="card-body">
+<h5 class="card-title"><a href="france.php">France Universities</a></h5>
+<p>40 Universities</p>
+</div>
+</div>
+</div>
+</div>
+</div>-->
+</section><section id="degrees" class="degrees divider-bottom"><div class="container">
+<div class="row">
+<div class="col">
+<div class="heading mb-30">
+<h2 class="heading-title">Scholarships by Degree Level</h2>
+</div>
+</div>
+<!--<div class="col">
+<div class="view-more text-right">
+<a href="degrees.php">View all <i class="icon-arrow-right"></i></a>
+</div>
+</div>-->
+</div>
+<div class="row">
+<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+<div id="degreeCarousel" class="carousel owl-carousel carousel-navs" data-slide="4" data-slide-rs="2" data-autoplay="false" data-nav="true" data-dots="false" data-space="0" data-loop="true" data-speed="800">
+<div class="card-degree">
+<div class="card-warp">
+<a href="Masters.php">
+<i class="icon-Masters"></i>
+<span>Masters</span>
+</a>
+</div>
+</div>
+<div class="card-degree">
+<div class="card-warp">
+<a href="Undergraduate.php">
+<i class="icon-Undergraduate"></i>
+<span>Undergraduate</span>
+</a>
+</div>
+</div>
+<div class="card-degree">
+<div class="card-warp">
+<a href="Bachelors.php">
+<i class="icon-Bachelor"></i>
+<span>Bachelor</span>
+</a>
+</div>
+</div>
+<div class="card-degree">
+<div class="card-warp">
+<a href="PhD.php">
+<i class="icon-PhD"></i>
+<span>PhD</span>
+</a>
+</div>
+</div>
+<!--<div class="card-degree">
+<div class="card-warp">
+<a href="diploma.php">
+<i class="icon-"></i>
+<span>Diploma</span>
+</a>
+</div>
+</div>
+<div class="card-degree">
+<div class="card-warp">
+<a href="post-doctorate.php">
+<i class="icon-"></i>
+<span>Post Doctorate</span>
+</a>
+</div>
+</div>
+<div class="card-degree">
+<div class="card-warp">
+<a href="graduate.php">
+<i class="icon-"></i>
+<span>Graduate</span>
+</a>
+</div>
+</div>
+<div class="card-degree">
+<div class="card-warp">
+<a href="research.php">
+<i class="icon-"></i>
+<span>Research</span>
+</a>
+</div>
+</div>-->
+</div>
+</div>
+</div>
+</div>
+</section><section class="latest-scholarship bg-white"><div class="container">
+<div class="row">
+<div class="col-sm-12 col-md-12 col-lg-6">
+<div class="heading heading-1">
+<h2 class="heading-title">Recent News and Updates</h2>
+</div>
+</div>
+
+</div>
+<div class="row">
+<div class="col-sm-12 col-md-12 col-lg-12">
+<ul class="nav nav-tabs" id="myTab" role="tablist"><li class="nav-item">
+<a class="nav-link active" id="recent-tab" data-toggle="tab" href="#recent" role="tab" aria-controls="recent" aria-selected="true">Education and Scholarships</a>
+</li>
+<li class="nav-item">
+<!--<a class="nav-link" id="latest-tab" data-toggle="tab" href="#blogs" role="tab" aria-controls="latest" aria-selected="false">Blogs</a>-->
+</li>
+<li class="nav-item">
+<a class="nav-link nav-all" href="News.php">View all <i class="icon-arrow-right"></i></a>
+</li>
+</ul><div class="tab-content" id="myTabContent">
+<div class="tab-pane fade show active" id="recent" role="tabpanel" aria-labelledby="recent-tab">
+<div class="row">
+<div class="col-12 col-md-4 col-lg-3 mb-30">
+<div class="card-scholarships">
+<div class="card-img" style="background-image: url('https://www.careerindia.com/img/2018/03/1-indianinstituteoftechnologymadras-1520582933.jpg');"></div>
+<div class="card-body">
+<h5 class="card-title"><a href="https://indianexpress.com/article/education/no-ews-quota-admission-to-centrally-sponsored-m-tech-courses-anna-university-informs-hc-annauniv-edu-7226640/">No EWS quota admission to centrally-sponsored M.Tech courses</a></h5>
+<div class="card-meta">
+<span class="card-date">21 April 2021</span>
+<span class="card-more"><a href="https://indianexpress.com/article/education/no-ews-quota-admission-to-centrally-sponsored-m-tech-courses-anna-university-informs-hc-annauniv-edu-7226640/"><i class="icon-arrow-long-right"></i></a></span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-4 col-lg-3 mb-30">
+<div class="card-scholarships">
+<div class="card-img" style="background-image: url('https://assets.skyfilabs.com/images/animatronics_hand_workshop_for_enigneering_students.jpg');"></div>
+<div class="card-body">
+<h5 class="card-title"><a href="https://indianexpress.com/article/education/maths-physics-and-chemistry-optional-for-engineering-admissions-aicte-aicte-india-org-7225555/">Maths, physics, chemistry not compulsory for engineering admissions: AICTE</a></h5>
+<div class="card-meta">
+<span class="card-date">19 April 2021</span>
+<span class="card-more"><a href="https://indianexpress.com/article/education/maths-physics-and-chemistry-optional-for-engineering-admissions-aicte-aicte-india-org-7225555/"><i class="icon-arrow-long-right"></i></a></span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-4 col-lg-3 mb-30">
+<div class="card-scholarships">
+<div class="card-img" style="background-image: url('https://cdn.dnaindia.com/sites/default/files/styles/full/public/2017/08/19/602514-dtu-delhi-technological-university-081917.jpg');"></div>
+<div class="card-body">
+<h5 class="card-title"><a href="https://indianexpress.com/article/education/delhi-technological-university-partners-samsung-to-set-up-innovation-lab/">Delhi Technological University partners Samsung to set up innovation lab</a></h5>
+<div class="card-meta">
+<span class="card-date">18 April 2021</span>
+<span class="card-more"><a href="https://indianexpress.com/article/education/delhi-technological-university-partners-samsung-to-set-up-innovation-lab/"><i class="icon-arrow-long-right"></i></a></span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-4 col-lg-3 mb-30">
+<div class="card-scholarships">
+<div class="card-img" style="background-image: url('https://thisismyhappiness.com/wp-content/uploads/2015/07/1024px-Mexican_Folkloric_Dancers_of_Jalisco-1024x680.jpg');"></div>
+<div class="card-body">
+<h5 class="card-title"><a href="https://indianexpress.com/article/education/ignou-launches-ma-in-folklore-and-culture-studies-through-odl-mode-ignouadmission-samarth-edu-in-7222201/">IGNOU launches MA in folklore and culture studies through ODL mode</a></h5>
+<div class="card-meta">
+<span class="card-date">16 April 2021</span>
+<span class="card-more"><a href="https://indianexpress.com/article/education/ignou-launches-ma-in-folklore-and-culture-studies-through-odl-mode-ignouadmission-samarth-edu-in-7222201/"><i class="icon-arrow-long-right"></i></a></span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-4 col-lg-3 mb-30">
+<div class="card-scholarships">
+<div class="card-img" style="background-image: url('https://cdn.dnaindia.com/sites/default/files/styles/full/public/2020/09/11/924568-neet-2020-new.jpg');"></div>
+<div class="card-body">
+<h5 class="card-title"><a href="https://mumbaimirror.indiatimes.com/news/india/now-neet-exam-can-be-attempted-in-hindi/articleshow/81487197.cms">Now, NEET exam can be attempted in Hindi</a></h5>
+<div class="card-meta">
+<span class="card-date">15 April 2021</span>
+<span class="card-more"><a href="https://mumbaimirror.indiatimes.com/news/india/now-neet-exam-can-be-attempted-in-hindi/articleshow/81487197.cms"><i class="icon-arrow-long-right"></i></a></span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-4 col-lg-3 mb-30">
+<div class="card-scholarships">
+<div class="card-img" style="background-image: url('https://cdn.dnaindia.com/sites/default/files/styles/full/public/2018/02/14/651363-women-budget.jpg');"></div>
+<div class="card-body">
+<h5 class="card-title"><a href="https://economictimes.indiatimes.com/industry/services/education/48x-growth-in-women-learners-in-online-training-over-past-five-years-report/articleshow/81387345.cms?from=mdr">48x growth in women learners in online training over past five years: Report</a></h5>
+ <div class="card-meta">
+<span class="card-date">12 April 2021</span>
+<span class="card-more"><a href="https://economictimes.indiatimes.com/industry/services/education/48x-growth-in-women-learners-in-online-training-over-past-five-years-report/articleshow/81387345.cms?from=mdr"><i class="icon-arrow-long-right"></i></a></span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-4 col-lg-3 mb-30">
+<div class="card-scholarships">
+<div class="card-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Delhiuni.jpg/300px-Delhiuni.jpg');"></div>
+<div class="card-body">
+<h5 class="card-title"><a href="https://economictimes.indiatimes.com/industry/services/education/nearly-half-of-40-central-universities-without-full-time-vc/articleshow/81381616.cms?from=mdr">Nearly half of 40 central universities without full-time VC</a></h5>
+<div class="card-meta">
+<span class="card-date">10 April 2021</span>
+<span class="card-more"><a href="https://economictimes.indiatimes.com/industry/services/education/nearly-half-of-40-central-universities-without-full-time-vc/articleshow/81381616.cms?from=mdr"><i class="icon-arrow-long-right"></i></a></span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-4 col-lg-3 mb-30">
+<div class="card-scholarships">
+<div class="card-img" style="background-image: url('https://img.etimg.com/thumb/msid-81466317,width-1070,height-580,imgsize-468895,overlay-economictimes/photo.jpg');"></div>
+<div class="card-body">
+<h5 class="card-title"><a href="https://economictimes.indiatimes.com/nri/study/uks-new-student-exchange-scheme-opens-indian-universities-to-also-tie-up/articleshow/81466327.cms">UK's new student exchange scheme opens; Indian universities to also tie-up</a></h5>
+<div class="card-meta">
+<span class="card-date">10 April 2021</span>
+<span class="card-more"><a href="https://economictimes.indiatimes.com/nri/study/uks-new-student-exchange-scheme-opens-indian-universities-to-also-tie-up/articleshow/81466327.cms"><i class="icon-arrow-long-right"></i></a></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!--<div class="tab-pane fade" id="blogs" role="tabpanel" aria-labelledby="latest-tab">
+<div class="row">
+<div class="col-12 col-md-4 col-lg-3 mb-30">
+<div class="card-scholarships">
+<div class="card-img" style="background-image: url('https://www.ndtv.com/education/cache-static/media/presets/625X400/article_images/2020/5/12/n4d2h5sg_medical-insurance-unsplash_625x300_10_January_19.webp');"></div>
+<div class="card-body">
+<h5 class="card-title"><a href="sit-master-in-computer-science-software-engineering-alumni-insights.php">Quota for the rich? 28% of MBBS seats cost over Rs 10 lakh per year in tuition fees</a></h5>
+<div class="card-meta">
+<span class="card-date">08 April 2021</span>
+<span class="card-more"><a href="sit-master-in-computer-science-software-engineering-alumni-insights.php"><i class="icon-arrow-long-right"></i></a></span>
+</div>
+</div>
+</div>
+</div>-->
+<!--<div class="col-12 col-md-4 col-lg-3 mb-30">
+<div class="card-scholarships">
+<div class="card-img" style="background-image: url('https://www.scholarshipsads.com/files/blog-pics/ielts-instruction.png');"></div>
+<div class="card-body">
+<h5 class="card-title"><a href="how-to-score-band-8-in-ielts.php">How to Score Band 8 in IELTS</a></h5>
+<div class="card-meta">
+<span class="card-date">04 Mar 2020</span>
+<span class="card-more"><a href="how-to-score-band-8-in-ielts.php"><i class="icon-arrow-long-right"></i></a></span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-4 col-lg-3 mb-30">
+<div class="card-scholarships">
+<div class="card-img" style="background-image: url('https://www.scholarshipsads.com/files/blog-pics/ielts.png');"></div>
+<div class="card-body">
+<h5 class="card-title"><a href="best-books-for-ielts-preparation.php">Best books for IELTS preparation</a></h5>
+<div class="card-meta">
+<span class="card-date">03 Mar 2020</span>
+<span class="card-more"><a href="best-books-for-ielts-preparation.php"><i class="icon-arrow-long-right"></i></a></span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-4 col-lg-3 mb-30">
+<div class="card-scholarships">
+<div class="card-img" style="background-image: url('https://www.scholarshipsads.com/files/2015/10/schengen-visa1.jpg');"></div>
+<div class="card-body">
+<h5 class="card-title"><a href="schengen-visa.php">Schengen Visa</a></h5>
+<div class="card-meta">
+<span class="card-date">25 Sep 2016</span>
+<span class="card-more"><a href="schengen-visa.php"><i class="icon-arrow-long-right"></i></a></span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-4 col-lg-3 mb-30">
+<div class="card-scholarships">
+<div class="card-img" style="background-image: url('https://www.scholarshipsads.com/files/2015/10/fittosize__620_0_f667aa7424721c91a08f96641831fc53_flughafen_koffer_student_ziegert-daad.jpg');"></div>
+<div class="card-body">
+<h5 class="card-title"><a href="germany-student-visa.php">Germany Student Visa</a></h5>
+<div class="card-meta">
+<span class="card-date">25 Sep 2016</span>
+<span class="card-more"><a href="germany-student-visa.php"><i class="icon-arrow-long-right"></i></a></span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-4 col-lg-3 mb-30">
+<div class="card-scholarships">
+<div class="card-img" style="background-image: url('https://www.scholarshipsads.com/files/2014/11/study-in-germany.jpg');"></div>
+<div class="card-body">
+<h5 class="card-title"><a href="study-visa-for-germany-for-international-students.php">Study VISA for Germany for International Students</a></h5>
+<div class="card-meta">
+<span class="card-date">10 Nov 2014</span>
+<span class="card-more"><a href="study-visa-for-germany-for-international-students.php"><i class="icon-arrow-long-right"></i></a></span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-4 col-lg-3 mb-30">
+<div class="card-scholarships">
+<div class="card-img"></div>
+ <div class="card-body">
+<h5 class="card-title"><a href="list-of-praxis-ii-subjects.php">LIST of PRAXIS II Subjects</a></h5>
+<div class="card-meta">
+<span class="card-date">30 Nov 2013</span>
+<span class="card-more"><a href="list-of-praxis-ii-subjects.php"><i class="icon-arrow-long-right"></i></a></span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-4 col-lg-3 mb-30">
+<div class="card-scholarships">
+<div class="card-img"></div>
+<div class="card-body">
+<h5 class="card-title"><a href="praxis-ii-test.php">PRAXIS II TEST</a></h5>
+<div class="card-meta">
+<span class="card-date">30 Nov 2013</span>
+<span class="card-more"><a href="praxis-ii-test.php"><i class="icon-arrow-long-right"></i></a></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>-->
+<!--</section><section class="header-ads bg-white"><div class="mb-50 mt-30" style="text-align:center; margin-right: auto; margin-left: auto;"><script async src="js/js-adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7405902537822315" data-ad-slot="4696464739" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></section><section class="social-bar"><div class="container">
+<div class="row">
+<div class="col">
+<div class="social-card">
+<a class="facebook" href="#">
+<span class="social-card-icon facebook">
+<i class="icon-facebook"></i>
+<i class="icon-facebook"></i>
+</span>
+<div>
+24.6 K <span>Shares</span>
+</div>
+</a>
+</div>
+</div>
+<div class="col">
+<div class="social-card">
+<a class="twitter" href="#">
+<span class="social-card-icon twitter">
+<i class="icon-twitter"></i>
+<i class="icon-twitter"></i>
+</span>
+<div>
+19.5 K <span>Shares</span>
+</div>
+</a>
+</div>
+</div>
+<div class="col">
+<div class="social-card">
+<a class="linkedin" href="#">
+<span class="social-card-icon linkedin">
+<i class="fa fa-linkedin"></i>
+<i class="fa fa-linkedin"></i>
+</span>
+<div>
+22.5 K <span>Shares</span>
+</div>
+</a>
+</div>
+</div>
+<div class="col">
+<div class="social-card">
+<a class="pinterest" href="#">
+<span class="social-card-icon pinterest">
+<i class="icon-pinterest"></i>
+<i class="icon-pinterest"></i>
+</span>
+<div>
+22.5 K <span>Shares</span>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section><footer id="footerParallax" class="footer footer-1"><div class="footer-top">
+<div class="container">
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3 footer-widget widget-about">
+<div class="widget-content">
+<img class="footer-logo" src="images/2019-logofooter.png" alt="logo"><ul><li>7,488 <span>Scholarships</span></li>
+<li>1,444 <span>Universities</span></li>
+</ul><p class="copyright mb-0">
+<span>Copyrights © ScholarshipsAds Inc. <br>All Rights Reserved.</span>
+</p>
+<p class="copyright">
+<span>Developed By <a href="https://smartiolabs.com" target="_blank" style="color:#03A9F4">Smart IO Labs</a></span>
+</p>
+</div>
+</div>
+<div class="col-sm-12 col-md-4 col-lg-2 footer-widget widget-links">
+<div class="footer-widget-title">
+<h5>Quick Links</h5>
+</div>
+<div class="widget-content">
+<ul><li>
+<a href="latest-scholarships.php">Latest Scholarships</a>
+</li>
+<li>
+<a href="account.php">Account</a>
+</li>
+<li>
+<a href="privacy-policy.php">Privacy Policy</a>
+</li>
+<li>
+<a href="about-us.php">About Us</a>
+</li>
+</ul></div>
+</div>
+<div class="col-sm-12 col-md-4 col-lg-2 footer-widget widget-links">
+<div class="footer-widget-title">
+<h5>Blog</h5>
+</div>
+<div class="widget-content">
+<ul><li>
+<a href="blog.php">Recent Topics</a>
+</li>
+<li>
+<a href="professional-exams.php">Professional Exams</a>
+</li>
+<li>
+<a href="visa.php">Visa</a>
+</li>
+<li>
+<a href="courses.php">Courses</a>
+</li>
+</ul></div>
+</div>
+<div class="col-sm-12 col-md-4 col-lg-2 footer-widget widget-links">
+<div class="footer-widget-title">
+<h5>More</h5>
+</div>
+<div class="widget-content">
+<ul><li>
+<a href="contact.php">Contact Us</a>
+</li>
+<li>
+<a href="dcma.php">DCMA</a>
+</li>
+<li><a href="https://apps.apple.com/pk/app/scholarshipsads/id1494931127" target="_blank"><img src="images/footer-store.png" alt="try iOS mobile app"></a></li>
+<li><a href="https://play.google.com/store/apps/details?id=com.scholarshipsads.app&amp;hl=en" target="_blank"><img src="images/footer-play.png" alt="try Android mobile app"></a></li>
+</ul></div>
+</div>
+<div class="col-sm-12 col-md-6 col-lg-3 footer-widget widget-contact-info">
+<div class="footer-widget-title">
+ <h5>Contact US</h5>
+</div>
+<div class="widget-content">
+<p><a href="email-protection.php" class="__cf_email__" data-cfemail="05666a6b716466714576666d6a696477766d6c75766461762b666a68">[email protected]</a></p>
+<div class="social--icons">
+<a href="https://www.facebook.com/ScholarshipsAds/" target="_blank" class="facebook"><i class="icon-facebook-full"></i></a> <a href="https://twitter.com/scholarshipads" target="_blank" class="twitter"><i class="icon-twitter-full"></i></a> <a href="https://www.linkedin.com/company/scholarshipsads/" target="_blank" class="linkedin"><i class="icon-linkedin-full"></i></a> </div>
+<a class="btn btn-primary" href="contact.php">Post Scholarship</a>
+</div>
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+</div>
+</footer></div>-->
+<script data-cfasync="false" src="js/cloudflare-static-email-decode.min.js"></script><script src="js/js-jquery-3.3.1.min.js"></script><script src="js/js-plugins.js"></script><script src="js/js-functions.js"></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-34843362-1"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-34843362-1');
+</script><script src="https://zunipush.com/integration/build/105982477"></script><script type="text/javascript" id="wau_scr_b0153903">
+    var wau_p = wau_p || []; wau_p.push(["2z3u", "b0153903", false]);
+    (function() {
+        var s=document.createElement("script"); s.type="text/javascript";
+        s.async=true; s.src="//widgets.amung.us/a_pro.js";
+        document.getElementsByTagName("head")[0].appendChild(s);
+    })();
+</script><meta name="p:domain_verify" content="4d9a6046355e47d839b1a11aa1ee3afd"><div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v4.0&amp;appId=363964800447800&amp;autoLogAppEvents=1"></script><script async src="js/widgets.js" charset="utf-8"></script></body></html>
